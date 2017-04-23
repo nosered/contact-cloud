@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div layout:fragment="content" class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <!-- <h1>
+        Contato<small>Cloud</small>
+      </h1> -->
+      <div style="font-size:25px;">
+      	<ol class="breadcrumb">
+        	<li><a th:href="@{/}"><i class="fa fa-home"></i> Home</a></li>
+        	<li><a th:href="@{/agenda/abrir}"><i class="fa fa-book"></i> Agenda</a></li>
+        	<li class="active"> Adicionar contato</li>
+      	</ol>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title">Adicionar contato</h3>
+        </div>
+        
+        <form role="form" th:action="@{/contato/salvar}" enctype="multipart/form-data" method="post" th:object="${contato}">
+        	<div class="box-body">
+        		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        		<input type="hidden" th:field="*{id}"></input>
+                <div class="form-group">
+                  <label for="nome">Nome</label>
+                  <input type="text" class="form-control" id="nome" th:field="*{nome}" placeholder="Digite o nome do contato"></input>
+                </div>
+                <div class="form-group">
+                  <label for="telefone">Telefone</label>
+                  <input type="text" class="form-control" id="telefone" th:field="*{telefone}" placeholder="Digite o telefone do contato"></input>
+                </div>
+                <div class="form-group">
+                  <label for="email">E-Mail</label>
+                  <input type="text" class="form-control" id="email" th:field="*{email}" placeholder="Digite o e-mail do contato"></input>
+                </div>
+                <div class="form-group">
+                  <label for="cidade">Cidade</label>
+                  <input type="text" class="form-control" id="cidade" th:field="*{cidade}" placeholder="Digite a cidade do contato"></input>
+                </div>
+                <!-- <div class="form-group">
+                  <label for="foto">Foto</label>
+                  <input type="file" id="foto" name="imagem"></input>
+                  <p class="help-block">Envie a foto do contato</p>
+                </div> -->
+                
+                <div th:if="${contato.id != null}" class="form-group">
+            		<img class="block-center img-rounded" id="imagemPreview" th:src="${contato.fotoPath}" style="width: 200px; height: 150px;"></img>
+            	</div>
+            	<div th:if="${contato.id == null}" class="form-group">
+            		<img class="block-center img-rounded" id="imagemPreview" src="https://s3-sa-east-1.amazonaws.com/contactcloudtest/defaultfile.png" style="width: 200px; height: 150px;"></img>
+            	</div>
+				<div class="form-group">
+            		<div class="input-group">
+						<input type="file" id="inputImagem" name="imagem" style="display:none" onchange="PreviewImagem();"></input>
+						<input type="hidden" th:field="*{foto}"></input>
+						<input type="text" id="fake-file-input-name" disabled="disabled" placeholder="Nenhuma imagem selecionada" class="form-control"></input>
+						<span class="input-group-btn">
+							<button id="fake-file-button-browse" type="button" class="btn btn-default" onclick="InputImagemClick();">
+								<span class="glyphicon glyphicon-folder-open"> Procurar</span>
+							</button>
+						</span>
+					</div>
+				</div>
+              </div>
+              <!-- /.box-body -->
+              
+              <div class="box-footer">
+              	<a th:href="@{/agenda/abrir}" class="btn btn-default">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+              </div>
+            </form>
+      </div>
+      <!-- /.box -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <div layout:fragment="scripts">
+  	<script th:src="@{/plugins/imgPreview/simple-preview-img.js}"></script>
+  </div>
+
+</html>

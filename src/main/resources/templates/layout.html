@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <meta charset="utf-8"></meta>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"></meta>
+
+  <title>Contact Cloud</title>
+  
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" th:href="@{/theme/bootstrap/css/bootstrap.min.css}"></link>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" th:href="@{/theme/font-awesome/css/font-awesome.min.css}"></link>
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/theme/css/AdminLTE.min.css}"></link>
+  
+  <link rel="stylesheet" th:href="@{/theme/css/skins/skin-black.min.css}"></link>
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body class="hold-transition skin-black sidebar-mini">
+<div class="wrapper">
+
+  <!-- Main Header -->
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a href="index.html" class="logo">
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Contact</b> Cloud</span>
+    </a>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- User Account Menu -->
+          <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- The user image in the navbar-->
+              <img th:src="@{/theme/img/user2-160x160.jpg}" class="user-image" alt="User Image"></img>
+              <!-- hidden-xs hides the username on small devices so only the image appears. -->
+              <span class="hidden-xs"><span sec:authentication="name"></span></span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- The user image in the menu -->
+              <!-- <li class="user-header">
+                <img th:src="@{/theme/img/user2-160x160.jpg}" class="img-circle" alt="User Image"></img>                <p>
+                  <strong><span sec:authentication="name"></span></strong>
+                </p>
+              </li> -->
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a th:href="@{/usuario/editar/form}" class="btn btn-default btn-flat">Alterar senha</a>
+                </div>
+                <div class="pull-right">
+                  <a th:href="@{/logout}" class="btn btn-default btn-flat">LogOut</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu">
+        <li class="header text-center">MENU PRINCIPAL</li>
+        <!-- Optionally, you can add icons to the links -->
+        <li class="treeview">
+          <a href="#"><i class="fa fa-calendar-o"></i> <span>Agenda</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          	<li><a th:href="@{/agenda/abrir}"><i class="fa fa-calendar-check-o"></i> <span>Abrir agenda</span></a></li>
+        	<li><a th:href="@{/contato/form}"><i class="fa fa-user-plus"></i> <span>Add contato</span></a></li>
+        	<li><a th:href="@{/usuario/remover}"><i class="fa fa-calendar-times-o"></i> <span>Deletar agenda</span></a></li>
+          </ul>
+        </li>
+        <li><a th:href="@{/usuario/editar/form}"><i class="fa fa-lock"></i> <span>Alterar Senha</span></a></li>
+        <li><a th:href="@{/logout}"><i class="fa fa-sign-out"></i> <span>Sair</span></a></li>
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- * * * * * * * * * * * * * * * LAYOUT FRAGMENT * * * * * * * * * * * * * * * * * * -->
+  <div layout:fragment="content"></div>
+  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+      Tema (AdminLTE) por <a href="https://almsaeedstudio.com/">almsaeedstudio</a>.
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2017 <a href="#">ContactCloud</a>.</strong> Todos os direitos reservados.
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery 2.2.3 -->
+<script th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script th:src="@{/theme/bootstrap/js/bootstrap.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/theme/js/app.min.js}"></script>
+
+<!-- * * * * * * * * * * * * * * * LAYOUT FRAGMENT * * * * * * * * * * * * * * * * * * -->
+<div layout:fragment="scripts"></div>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+</body>
+</html>

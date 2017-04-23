@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorator="layout">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div layout:fragment="content" class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <!-- <h3>
+        Agenda de contatos
+      </h3> -->
+      <div style="font-size: 25px">
+      	<ol class="breadcrumb">
+        	<li><a th:href="@{/}"><i class="fa fa-home"></i> Home</a></li>
+        	<li class="active"> Agenda de contatos</li>
+      	</ol>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+    	<div class="box">
+        	<div class="box-header with-border">
+          		<!-- <h3 class="box-title">Agenda de contatos</h3> -->
+          		
+          		<a class="pull-left" style="margin-right: 440px" th:href="@{/contato/form}">
+          			<button  type="button" class="btn btn-success" data-toggle="tooltip" title="Clique para adicionar um novo contato">
+              			<i class="fa fa-plus"></i> Adicionar contato
+              		</button>
+              	</a>
+          		
+          		<!-- <div class="box-tools pull-right"> -->
+          			<div style="margin-right: 20px;" class="input-group">
+                		<input type="search" id="busca" class="form-control"></input>
+                		<div class="input-group-btn">
+                  			<button id="btn-buscar" disabled="disabled" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Buscar
+                    			<span class="fa fa-caret-down"></span>
+                    		</button>
+                  			<ul class="dropdown-menu">
+                    			<li><a href="/contato/buscar/nome/" id="linkBuscaNome">Nome</a></li>
+                    			<li><a href="/contato/buscar/cidade/" id="linkBuscaCidade">Cidade</a></li>
+                    			<li class="divider"></li>
+                    			<li><a th:href="@{/agenda/abrir}">Todos</a></li>
+                  			</ul>
+                		</div>
+                		<!-- /btn-group -->
+              		</div>
+              		<!-- /input-group -->
+          		<!-- </div>  -->
+        	</div>
+        	
+        	<div class="box-body">
+          		<table class="table">
+      				<thead>
+      					<tr>
+      						<td>Foto</td>
+      						<td>Nome</td>
+      						<td>Telefone</td>
+      						<td>E-Mail</td>
+      						<td>Cidade</td>
+      						<td align="center">Editar</td>
+      						<td align="center">Excluir</td>
+      					</tr>
+      				</thead>
+      				<tbody>
+      					<tr th:each="contato : ${contatos}">
+      						<td>
+      							<div class="product-img">
+                    				<img th:src="${contato.fotoPath}" width="50px" alt="Product Image"></img>
+                  				</div>
+      						</td>
+      						<td style="vertical-align: middle;" th:text="${contato.nome}"></td>
+      						<td style="vertical-align: middle;" th:text="${contato.telefone}"></td>
+      						<td style="vertical-align: middle;" th:text="${contato.email}"></td>
+      						<td style="vertical-align: middle;" th:text="${contato.cidade}"></td>
+      						<td style="vertical-align: middle;" align="center"><a th:href="@{/contato/editar/{id}(id=${contato.id})}"><i class="fa fa-edit text-green text-center"></i></a></td>
+      						<td style="vertical-align: middle;" align="center"><a th:href="@{/contato/remover/{id}(id=${contato.id})}"><i class="fa fa-trash-o text-red text-center"></i></a></td>
+      					</tr>
+      				</tbody>
+      			</table>
+        	</div>
+        	<!-- /.box-body -->
+        
+        	<!-- <div class="box-footer">
+          		Footer
+        	</div>  -->
+        	<!-- /.box-footer-->
+      	</div>
+      	<!-- /.box -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <div layout:fragment="scripts">
+  	<script type="text/javascript">
+  		$('#busca').on('keyup', function() {
+  			if($(this).val != '') {
+  				$('#btn-buscar').removeAttr('disabled');
+  				$('#btn-buscar').prop('disabled', false);
+  			}
+  			if($(this).val == '') {
+  				console.log("Vazio");
+  				$('#btn-buscar').attr('disabled');
+  				$('#btn-buscar').prop('disabled', true);
+  			}
+  		});
+  		
+  		$('#linkBuscaNome').on('click', function(e) {
+  	  		e.preventDefault();
+  	  		var address = $(this).attr('href') + $('#busca').val();
+  	  		window.location = address;
+  		});
+  		
+  		$('#linkBuscaCidade').on('click', function(e) {
+  	  		e.preventDefault();
+  	  		var address = $(this).attr('href') + $('#busca').val();
+  	  		window.location = address;
+  		});
+  	</script>
+  
+  </div>
+
+</html>

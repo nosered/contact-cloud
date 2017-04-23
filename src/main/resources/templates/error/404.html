@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div layout:fragment="content" class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <!-- <h1>
+        404 Error Page
+      </h1> -->
+      <div style="font-size:25px;">
+      	<ol class="breadcrumb">
+        	<li><a th:href="@{/}"><i class="fa fa-home"></i> Home</a></li>
+        	<li class="active"> Página não encontrada</li>
+      	</ol>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="error-page">
+        <h2 class="headline text-yellow"> 404</h2>
+        <div class="error-content">
+          <h3><i class="fa fa-warning text-yellow"></i> Oops! Página não encontrada.</h3>
+          <p>
+            Não foi possível encontrar a página acessada.<br/>
+            Você pode <a class="text-yellow" th:href="@{/agenda/abrir}">retornar à sua agenda</a> ou usar o menu de navegação.
+          </p>
+        </div>
+        <!-- /.error-content -->
+      </div>
+      <!-- /.error-page -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <div layout:fragment="scripts"></div>
+
+</html>
